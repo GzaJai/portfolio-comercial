@@ -1,0 +1,32 @@
+{
+  "projects": [
+    {
+      "title": "Consultora ALC",
+      "description": "Plataforma web para servicios de consultoría legal y comercial. Enfocada en la presentación clara de servicios y facilitación del contacto corporativo.",
+      "tags": ["React", "Node.js"],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAXl4wELOYjSlYzcVyAU8mYEbwZy6LTWPx5HVN-DjPdIa2oTEAhZL-k69b4tBfPYyd4BeLl0IYZdyOrSkLtm_5mBzz6wl5VWqbVgkfpSir7YDXqbvWsed7UALiZKiZXMjMjg1rw_CagIMCDNxXHKnkmDEmTlZOsUhAfWXN1JOBbDPTYcIOXXGZySNjkMPnat-RHP1GHgBmk9eBlEQ2nyNJkECGYoXjsykCp-gKmnJjCmWozaopE229IM3YLlFuMZy0eBtMPhYUYdYQ",
+      "imageAlt": "A high-fidelity mockup of a modern legal and business consultancy dashboard interface."
+    },
+    {
+      "title": "Aplicación de Tareas",
+      "description": "Herramienta de productividad diseñada con un enfoque 'Less but Better' para la gestión eficiente del tiempo y priorización de objetivos diarios.",
+      "tags": ["Vue", "Firebase"],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAIvIzoNrqMnHDfc4AIQFS8zplwD31ZV2lG9tcDuGGwhsdHHg-t27mr82LR6LzEYBoBiF484nn5w9w7Mmf7gmBZEcoNLwcizd58YOsTUqjgjJZ51-o30dBiomtUWvzOvo3tzHd9KtYXaNe-dcAFFYCV_Y81of48bgyPtcLq-roiBmX3DTjzuMOZpJxyjnHYH9ZAfI3tEe3Dvm18ZkFTjyPJZVy_URbpVfw6wetiokhWmqmv9ACAF5L7iGT2aWD6XuG10ZiCeQytrCU",
+      "imageAlt": "A clean, minimalist user interface design for a productivity task management application."
+    },
+    {
+      "title": "Presupuestos Online",
+      "description": "Solución financiera para la generación, cálculo y gestión de presupuestos comerciales, asegurando precisión matemática y facilidad de uso.",
+      "tags": ["TypeScript", "Express"],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuBSJjSaGbTPcbkDfVbIr9EMODq6-bPdV-LHZKumsX48pvXu7nZCLIWUf4hsfZKX2r6AU-GhQYapSBBjn-pJO7IM0Wm3kFGyHKbRpN0GahlE-fkRZJggK3CNTEVARVNHAFRk_6kWO62rqx3AJMmb5b4RIgG8Sqp82sqHEoxtGSGW1xni5ssIDLi7gZx_iTpVrZIPxsCXkxocaKQlzep-mVfDGiH2oKx805jns8KgtZikUWUJAkusM1zxFeTW9vxbw0px5XTkjK2GF0w",
+      "imageAlt": "A professional financial budgeting web application interface."
+    },
+    {
+      "title": "Country Hunt",
+      "description": "Aplicación interactiva basada en datos para la visualización y análisis de información geográfica mediante integración de APIs de terceros.",
+      "tags": ["React", "REST APIs"],
+      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAXWltdj6CzZIlthLMmVO-LTs9w0uYz5zzrX_kxgBWA2LJHdV4fegNpOuN-C-qdd_OXa80uDP3rJNCl9OyZdLSX4QF1ManNlqwayq1W315uXEdcPnuVkwtxeRBPVsH1cn9wQC_Zma6dg2SXYmIKVrUp1sPCV8mPyrcjKqoZ15Qdi0jfq_WzpKfBT36VFmH50qUzhaDLEcy5pzXNGnJxfmy58FO-63AyfEGQJfl8eMacTJuqNSnwwLhKYs6k_0XaQSsZi-UdrWVK_g8",
+      "imageAlt": "An interactive data visualization application interface showing geographical information."
+    }
+  ]
+}
