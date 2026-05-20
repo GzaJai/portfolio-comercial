@@ -1,14 +1,18 @@
 {
   "siteName": "Gonzalo Jaime",
 
+  "whatsapp": {
+    "message": "Hola Gonzalo, vi tu portfolio y me gustaría contactarte."
+  },
+
   "nav": {
     "items": [
-      { "label": "About", "href": "#about", "active": true },
-      { "label": "Projects", "href": "#projects", "active": false },
-      { "label": "Contact", "href": "#contact", "active": false }
+      { "label": "Sobre mi", "href": "#about", "active": true },
+      { "label": "Proyectos", "href": "#projects", "active": false },
+      { "label": "Contacto", "href": "#contact", "active": false }
     ],
     "cta": {
-      "label": "Get in Touch",
+      "label": "Hablemos",
       "href": "#contact"
     }
   },
@@ -20,12 +24,12 @@
       "Hola, soy Gonzalo Jaime. Desarrollador full-stack Argentino con un enfoque en soluciones de negocio. Actualmente estoy perfeccionando mis habilidades académicas, respaldadas por una sólida base técnica adquirida a través de formación continua y experiencia práctica como freelancer.",
       "Me especializo en crear herramientas digitales eficientes, precisas y escalables, orientadas a optimizar procesos empresariales y mejorar la productividad."
     ],
-    "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAnt3Tt7llBEOJcK4AAl7YkFhQkzfDHAorBEATdw9Jn96El2L3KlqL2b7fDyjqfbLEkAA5aFCUOtvMWnd1zudR-wvbJwzCnmNVpGPrIdp8VWHwwPCFNOzPFutye3pfWPLNRL0tCdNkjaOshTKL_e_c6x3F8_1ltl0rF82K4_r52uFtGak4BUJ78n_z1wwph7YRJlpKjOdh9iqLLxjMwO2faLaa1NAmdSINA1QTwXQLe7KA_joICiVnJjuxmhgK8H6UDCWE7-o3W3K8",
+    "imageUrl": "https://raw.githubusercontent.com/GzaJai/portfolio-comercial/refs/heads/master/src/assets/yo-portfolio.jpg",
     "imageAlt": "Professional Headshot",
     "buttons": {
       "cv": {
         "label": "Chequea mi CV",
-        "href": "#"
+        "href": "https://drive.google.com/file/d/1vuuX_IotTkwOhfJ_GX2rx1XKrxsDNCAG/view?usp=sharing"
       },
       "contact": {
         "label": "Envíame un mensaje",
@@ -48,10 +52,9 @@
 
   "footer": {
     "links": [
-      { "label": "LinkedIn", "href": "#" },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/gjaimeguinazu/" },
       { "label": "GitHub", "href": "https://github.com/GzaJai" },
-      { "label": "Services", "href": "#" },
-      { "label": "Terms", "href": "#" }
+      { "label": "Servicios", "href": "#" }
     ],
     "copyright": "© 2024 Gonzalo Jaime. Professional Software Engineering."
   }

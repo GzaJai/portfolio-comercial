@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { MdDownload } from "react-icons/md";
+import UiLink from "../../shared/components/ui/UiLink";
 import links from "../data/links.json";
 
 const PARALLAX_LAYERS = [
@@ -64,7 +65,9 @@ const LAYER_OPACITIES = [
 export default function HeroSection() {
   const containerRef = useRef(null);
   const layersRef = useRef([]);
-  const { hero } = links;
+  const { hero, whatsapp } = links;
+  const phone = import.meta.env.VITE_WHATSAPP_PHONE;
+  const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(whatsapp.message)}`;
 
   useEffect(() => {
     const parallaxContainer = containerRef.current;
@@ -139,39 +142,44 @@ export default function HeroSection() {
       {/* Content Grid */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center relative z-10">
         {/* Left: Text Content */}
-        <div className="md:col-span-7 flex flex-col items-start space-y-6">
-          <div>
-            <h1 className="text-display-lg-mobile md:text-display-lg text-primary">
-              {hero.name}
-            </h1>
-            <h2 className="text-headline-md text-secondary mt-2">
-              {hero.title}
-            </h2>
-          </div>
+        <div className="md:col-span-7 flex flex-col items-start space-y-6 relative">
+          {/* Soft mask to keep the dots extremely light behind the text */}
+          <div className="absolute -inset-10 bg-hero-mask pointer-events-none z-0" />
 
-          <p className="text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
-            {hero.description.map((paragraph, i) => (
-              <span key={i}>
-                {i > 0 && <br />}
-                {paragraph}
-              </span>
-            ))}
-          </p>
+          <div className="relative z-10 flex flex-col items-start space-y-6 w-full">
+            <div>
+              <h1 className="text-display-lg-mobile md:text-display-lg text-primary">
+                {hero.name}
+              </h1>
+              <h2 className="text-headline-md text-secondary mt-2">
+                {hero.title}
+              </h2>
+            </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto">
-            <a
-              href={hero.buttons.cv.href}
-              className="inline-flex items-center justify-center gap-2 bg-secondary text-on-secondary font-label-md text-label-md px-6 py-3 rounded-lg hover:bg-on-secondary-fixed-variant transition-colors w-full sm:w-auto"
-            >
-              <MdDownload size={18} />
-              {hero.buttons.cv.label}
-            </a>
-            <a
-              href={hero.buttons.contact.href}
-              className="inline-flex items-center justify-center bg-transparent border border-primary text-primary font-label-md text-label-md px-6 py-3 rounded-lg hover:bg-surface-variant transition-colors w-full sm:w-auto animate-pulse-subtle"
-            >
-              {hero.buttons.contact.label}
-            </a>
+            <p className="text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+              {hero.description.map((paragraph, i) => (
+                <span key={i}>
+                  {i > 0 && <><br /><br /></>}
+                  {paragraph}
+                </span>
+              ))}
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto">
+              <UiLink
+                href={hero.buttons.cv.href}
+                className="inline-flex items-center justify-center gap-2 bg-secondary text-on-secondary font-label-md text-label-md px-6 py-3 rounded-lg hover:bg-on-secondary-fixed-variant transition-colors w-full sm:w-auto"
+              >
+                <MdDownload size={18} />
+                {hero.buttons.cv.label}
+              </UiLink>
+              <UiLink
+                href={whatsappUrl}
+                className="inline-flex items-center justify-center bg-transparent border border-primary text-primary font-label-md text-label-md px-6 py-3 rounded-lg hover:bg-surface-variant transition-colors w-full sm:w-auto animate-pulse-subtle"
+              >
+                {hero.buttons.contact.label}
+              </UiLink>
+            </div>
           </div>
         </div>
 

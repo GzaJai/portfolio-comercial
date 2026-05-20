@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 /* ─── Tailwind v4 Theme ─── */
 @theme {
@@ -212,4 +212,107 @@
     background: #ffffff;
     border-color: transparent;
   }
+}
+
+/* ─── Smooth Fade Background (coherence and readability) ─── */
+.bg-smooth-fade {
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.95) 12%,
+    rgba(255, 255, 255, 0.95) 88%,
+    transparent
+  );
+}
+
+/* ─── Hero Text Mask (to protect legibility in Hero section) ─── */
+.bg-hero-mask {
+  background: radial-gradient(
+    circle at 35% 50%,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(255, 255, 255, 0.8) 55%,
+    transparent 85%
+  );
+}
+
+/* ─── Metallic Shimmer Tag ─── */
+.tag-metallic {
+  background: linear-gradient(
+    120deg,
+    #e2e8f0 0%,
+    #cbd5e1 30%,
+    #ffffff 50%,
+    #cbd5e1 70%,
+    #e2e8f0 100%
+  );
+  background-size: 200% 100%;
+  animation: metallic-sheen 4s linear infinite;
+  border: 1px solid #cbd5e1;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+  color: #1e293b;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tag-metallic:hover {
+  border-color: #94a3b8;
+  color: #000000;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 4px 6px -1px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+@keyframes metallic-sheen {
+  0% {
+    background-position: 150% 0;
+  }
+  30% {
+    background-position: -50% 0;
+  }
+  100% {
+    background-position: -50% 0;
+  }
+}
+
+/* ─── Modal Animations ─── */
+.modal-backdrop-enter {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+.modal-content-enter {
+  animation: scaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(4px);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ─── Hidden Scrollbar (mantiene scroll pero oculta la barra) ─── */
+.scrollbar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
 }

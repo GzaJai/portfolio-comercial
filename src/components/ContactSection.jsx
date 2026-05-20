@@ -1,9 +1,12 @@
 import { useEffect, useRef } from "react";
+import UiLink from "../../shared/components/ui/UiLink";
 import links from "../data/links.json";
 
 export default function ContactSection() {
   const sectionRef = useRef(null);
-  const { contact } = links;
+  const { contact, whatsapp } = links;
+  const phone = import.meta.env.VITE_WHATSAPP_PHONE;
+  const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(whatsapp.message)}`;
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -32,7 +35,7 @@ export default function ContactSection() {
       className="py-section-padding-mobile md:py-section-padding-desktop max-w-container-max mx-auto px-6 md:px-24 scroll-reveal"
       id="contact"
     >
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto bg-hero-mask">
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-headline-md text-primary">{contact.title}</h2>

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import UiLink from "../../shared/components/ui/UiLink";
 import links from "../data/links.json";
 
 export default function Footer() {
@@ -29,8 +30,11 @@ export default function Footer() {
   return (
     <footer
       ref={sectionRef}
-      className="w-full border-t border-surface-variant bg-surface-container-low/60 backdrop-blur-md text-on-surface scroll-reveal"
+      className="w-full bg-smooth-fade text-on-surface scroll-reveal relative"
     >
+      {/* Gradient top border */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-surface-variant to-transparent pointer-events-none" />
+
       <div className="flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto px-6 md:px-24 py-16 gap-8">
         {/* Brand */}
         <div className="font-headline-sm font-bold text-primary">
@@ -40,14 +44,13 @@ export default function Footer() {
         {/* Links */}
         <div className="flex gap-6 items-center">
           {footer.links.map((link) => (
-            <a
+            <UiLink
               key={link.label}
               href={link.href}
-              target="_blank"
               className="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200"
             >
               {link.label}
-            </a>
+            </UiLink>
           ))}
         </div>
 

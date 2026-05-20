@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <body className="w-[80%] mx-auto bg-background text-on-background font-body-md antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed relative z-0">
+    <div className="w-[80%] mx-auto relative z-0">
       <DotGrid />
       <TopNavBar />
       <main className="relative z-10">
@@ -16,6 +16,6 @@ export default function App() {
         <ContactSection />
       </main>
       <Footer />
-    </body>
+    </div>
   );
 }

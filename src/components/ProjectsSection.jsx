@@ -1,10 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MdOpenInNew } from "react-icons/md";
 import data from "../data/projects.json";
+import ProjectModal from "./ProjectModal";
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, onClick }) {
   return (
-    <div className="card-glow-wrapper group cursor-pointer">
+    <div className="card-glow-wrapper group cursor-pointer" onClick={onClick}>
       <article className="rounded-xl overflow-hidden shadow-[0_8px_16px_-4px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col relative z-10 bg-surface">
         {/* Image */}
         <div className="h-64 overflow-hidden border-b border-surface-variant bg-surface-container relative transition-colors duration-300">
@@ -36,7 +37,7 @@ function ProjectCard({ project }) {
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="font-label-md text-label-md text-on-surface-variant group-hover:text-black bg-surface-container group-hover:bg-gradient-to-r group-hover:from-gray-300 group-hover:via-gray-100 group-hover:to-gray-300 border border-outline-variant group-hover:border-gray-400 group-hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] px-3 py-1 rounded-full transition-all duration-300"
+                className="tag-metallic font-label-md text-label-md px-3 py-1 rounded-full cursor-default"
               >
                 {tag}
               </span>
@@ -51,6 +52,7 @@ function ProjectCard({ project }) {
 export default function ProjectsSection() {
   const sectionRef = useRef(null);
   const { projects } = data;
+  const [selectedProject, setSelectedProject] = useState(null);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -76,10 +78,13 @@ export default function ProjectsSection() {
   return (
     <section
       ref={sectionRef}
-      className="py-section-padding-mobile md:py-section-padding-desktop bg-surface-container-low/40 backdrop-blur-md border-y border-surface-variant scroll-reveal"
+      className="w-full bg-smooth-fade scroll-reveal relative"
       id="projects"
     >
-      <div className="max-w-container-max mx-auto px-6 md:px-24">
+      {/* Gradient top border */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-surface-variant to-transparent pointer-events-none" />
+
+      <div className="max-w-container-max mx-auto px-6 md:px-24 py-section-padding-mobile md:py-section-padding-desktop">
         {/* Header */}
         <div className="mb-12">
           <h2 className="text-headline-md text-primary">
@@ -93,10 +98,24 @@ export default function ProjectsSection() {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+            <ProjectCard
+              key={project.title}
+              project={project}
+              onClick={() => setSelectedProject(project)}
+            />
           ))}
         </div>
       </div>
+
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
+
+      {/* Gradient bottom border */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-surface-variant to-transparent pointer-events-none" />
     </section>
   );
 }
