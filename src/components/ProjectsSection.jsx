@@ -12,6 +12,11 @@ function ProjectCard({ project, onClick }) {
     ? project.imageUrl
     : IMAGE_BASE_URL + project.imageUrl;
 
+  // Limitar la cantidad de texto visible en mobile
+  const maxCharsMobile = 140;
+  const isLong = project.description.length > maxCharsMobile;
+  const shortDesc = isLong ? project.description.slice(0, maxCharsMobile) + "..." : project.description;
+
   return (
     <div className="card-glow-wrapper group cursor-pointer" onClick={onClick}>
       <article className="rounded-xl overflow-hidden shadow-[0_8px_16px_-4px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col relative z-10 bg-surface">
@@ -36,20 +41,53 @@ function ProjectCard({ project, onClick }) {
             />
           </div>
 
-          <p className="text-body-md text-on-surface-variant mb-6 flex-grow transition-colors duration-300">
-            {project.description}
-          </p>
+          {/* Desktop: descripción completa, Mobile: truncada con difuminado visual */}
+          <div className="mb-6 flex-grow relative">
+            <p className="text-body-md text-on-surface-variant hidden md:block transition-colors duration-300">
+              {project.description}
+            </p>
+            <div className="block md:hidden relative">
+              <p className="text-body-md text-on-surface-variant transition-colors duration-300 line-clamp-5 pr-2">
+                {shortDesc}
+              </p>
+              {isLong && (
+                <div className="pointer-events-none absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-surface to-transparent rounded-b-xl" />
+              )}
+            </div>
+          </div>
 
-          {/* Tags */}
+          {/* Tags: mobile solo 2 y un +N, desktop todos */}
           <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="tag-metallic font-label-md text-label-md px-3 py-1 rounded-full cursor-default"
-              >
-                {tag}
-              </span>
-            ))}
+            {/* Desktop: todos los tags */}
+            <div className="hidden md:flex flex-wrap gap-2 w-full">
+              {project.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="tag-metallic font-label-md text-label-md px-3 py-1 rounded-full cursor-default"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            {/* Mobile: solo 2 tags y un +N si hay más */}
+            <div className="flex md:hidden flex-wrap gap-2 w-full items-center">
+              {project.tags.slice(0,2).map((tag) => (
+                <span
+                  key={tag}
+                  className="tag-metallic font-label-md text-label-md px-2.5 py-0.5 rounded-full cursor-default text-xs"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            {/* Pill +N siempre debajo en mobile si hay más de 2 tags */}
+            {project.tags.length > 2 && (
+              <div className="flex md:hidden w-full mt-1">
+                <span className="tag-metallic font-label-md text-label-md px-2 py-0.5 rounded-full cursor-default text-xs bg-surface-variant text-on-surface-variant">
+                  +{project.tags.length - 2}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </article>
