@@ -156,13 +156,17 @@ export default function HeroSection() {
               </h2>
             </div>
 
-            <p className="text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+            {/* Desktop: ambos párrafos, Mobile: solo el segundo */}
+            <p className="text-body-lg text-on-surface-variant max-w-2xl leading-relaxed hidden md:block">
               {hero.description.map((paragraph, i) => (
                 <span key={i}>
                   {i > 0 && <><br /><br /></>}
                   {paragraph}
                 </span>
               ))}
+            </p>
+            <p className="text-body-lg text-on-surface-variant max-w-2xl leading-relaxed block md:hidden">
+              {hero.description[1]}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto">
