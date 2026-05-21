@@ -8,7 +8,10 @@ import UiTooltip from "./shared/ui/UiTooltip";
 export default function ProjectModal({ project, onClose }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  const images = project?.images?.length ? project.images : [project?.imageUrl];
+  const IMAGE_BASE_URL = "https://raw.githubusercontent.com/GzaJai/portfolio-comercial/refs/heads/master/src/assets/projects/";
+  // Normalizar rutas de imágenes para que funcionen con la URL base
+  const images = (project?.images?.length ? project.images : [project?.imageUrl])
+    .map(img => img?.startsWith("http") ? img : IMAGE_BASE_URL + img);
   const hasMultipleImages = images.length > 1;
   const phone = import.meta.env.VITE_WHATSAPP_PHONE;
 
