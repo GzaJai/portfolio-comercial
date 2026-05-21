@@ -8,6 +8,7 @@ import UiTooltip from "./shared/ui/UiTooltip";
 export default function ProjectModal({ project, onClose }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [slideDirection, setSlideDirection] = useState(null); // 'left' | 'right' | null
   const IMAGE_BASE_URL = "https://raw.githubusercontent.com/GzaJai/portfolio-comercial/refs/heads/master/src/assets/projects/";
   // Normalizar rutas de imágenes para que funcionen con la URL base
   const images = (project?.images?.length ? project.images : [project?.imageUrl])
@@ -89,26 +90,6 @@ export default function ProjectModal({ project, onClose }) {
                 onClick={() => setIsLightboxOpen(true)}
                 className="w-full h-full object-cover transition-transform duration-500 ease-out cursor-zoom-in hover:scale-102"
               />
-              
-              {/* Navigation Arrows */}
-              {images.length > 1 && (
-                <>
-                  <button
-                    onClick={() => setActiveImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-colors cursor-pointer hover:scale-105 z-10"
-                    aria-label="Imagen anterior"
-                  >
-                    <MdChevronLeft size={22} />
-                  </button>
-                  <button
-                    onClick={() => setActiveImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-colors cursor-pointer hover:scale-105 z-10"
-                    aria-label="Imagen siguiente"
-                  >
-                    <MdChevronRight size={22} />
-                  </button>
-                </>
-              )}
             </div>
 
             {/* Thumbnails list */}
@@ -155,7 +136,7 @@ export default function ProjectModal({ project, onClose }) {
               {/* Technologies */}
               <div className="mb-8">
                 <span className="text-label-md font-bold text-on-surface-variant tracking-wider uppercase block mb-3">
-                  Tecnologías
+                  Soluciones clave
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
@@ -224,27 +205,53 @@ export default function ProjectModal({ project, onClose }) {
             <MdClose size={24} />
           </button>
 
-          {/* Main Image Box in Lightbox */}
-          <div className="relative max-h-[70vh] max-w-[85vw] flex items-center justify-center">
+          {/* Main Image Box in Lightbox con swipe en mobile y flechas solo desktop */}
+          <div
+            className="relative max-h-[70vh] max-w-[85vw] flex items-center justify-center overflow-hidden"
+            onTouchStart={(e) => {
+              if (images.length < 2) return;
+              e.currentTarget.swipeStartX = e.touches[0].clientX;
+            }}
+            onTouchEnd={(e) => {
+              if (images.length < 2 || typeof e.currentTarget.swipeStartX !== 'number') return;
+              const deltaX = e.changedTouches[0].clientX - e.currentTarget.swipeStartX;
+              if (Math.abs(deltaX) > 40) {
+                if (deltaX > 0) {
+                  setSlideDirection('right');
+                  setTimeout(() => {
+                    setActiveImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+                    setSlideDirection(null);
+                  }, 200);
+                } else {
+                  setSlideDirection('left');
+                  setTimeout(() => {
+                    setActiveImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+                    setSlideDirection(null);
+                  }, 200);
+                }
+              }
+              e.currentTarget.swipeStartX = undefined;
+            }}
+          >
             <img
               src={images[activeImageIndex]}
               alt={`${project.title} screenshot ${activeImageIndex + 1}`}
-              className="max-h-[70vh] max-w-[85vw] object-contain rounded-lg shadow-2xl"
+              className={`max-h-[70vh] max-w-[85vw] object-contain rounded-lg shadow-2xl transition-transform duration-200 ${slideDirection === 'left' ? '-translate-x-full opacity-0' : ''} ${slideDirection === 'right' ? 'translate-x-full opacity-0' : ''}`}
+              style={{ willChange: 'transform, opacity' }}
             />
-
-            {/* Navigation Arrows */}
+            {/* Navigation Arrows solo en desktop */}
             {images.length > 1 && (
               <>
                 <button
                   onClick={() => setActiveImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))}
-                  className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors cursor-pointer hover:scale-105 z-20"
+                  className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors cursor-pointer hover:scale-105 z-20 hidden md:block"
                   aria-label="Imagen anterior"
                 >
                   <MdChevronLeft size={28} />
                 </button>
                 <button
                   onClick={() => setActiveImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))}
-                  className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors cursor-pointer hover:scale-105 z-20"
+                  className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors cursor-pointer hover:scale-105 z-20 hidden md:block"
                   aria-label="Imagen siguiente"
                 >
                   <MdChevronRight size={28} />
