@@ -4,13 +4,13 @@
       "title": "YUI ONE",
       "description": "Sistema de gestión integral y CRM diseñado específicamente para optimizar la operativa de agencias inmobiliarias. Permite centralizar la administración de propiedades, automatizar el seguimiento de clientes y agilizar la gestión comercial en una sola plataforma.",
       "tags": ["CRM Inmobiliario", "Control de Propiedades", "Panel de Control", "Gestión de Clientes", "Diseño Adaptable"],
-      "imageUrl": "src/assets/projects/yui-one/dashboard.png",
+      "imageUrl": "yui-one/dashboard.png",
       "imageAlt": "A high-fidelity mockup of an all-in-one real estate business management system and CRM dashboard interface.",
       "images": [
-        "src/assets/projects/yui-one/dashboard.png",
-        "src/assets/projects/yui-one/clientes.png",
-        "src/assets/projects/yui-one/propiedades.png",
-        "src/assets/projects/yui-one/propiedad.png"
+        "yui-one/dashboard.png",
+        "yui-one/clientes.png",
+        "yui-one/propiedades.png",
+        "yui-one/propiedad.png"
       ],
       "demoUrl": "https://yuione.com.ar",
       "repoUrl": ""
@@ -25,35 +25,35 @@
       "Diseño de Alto Impacto",
       "Navegación Fluida"
     ],
-    "imageUrl": "src/assets/projects/logistix/main.png",
+    "imageUrl": "logistix/main.png",
     "imageAlt": "A modern and sleek logistics management and fleet tracking dashboard interface.",
     "images": [
-      "src/assets/projects/logistix/main.png",
-      "src/assets/projects/logistix/services.png",
-      "src/assets/projects/logistix/aboutus.png",
-      "src/assets/projects/logistix/projects.png",
-      "src/assets/projects/logistix/contact.png"
-      
+      "logistix/main.png",
+      "logistix/services.png",
+      "logistix/aboutus.png",
+      "logistix/projects.png",
+      "logistix/contact.png"
     ],
     "demoUrl": "https://logistix-demo.vercel.app/",
     "repoUrl": ""
   },
   {
-    "title": "Lucerna",
-    "description": "Plataforma web corporativa y catálogo digital de alta fidelidad. Desarrollada con un enfoque estético y minimalista, optimizada para la conversión de clientes, presentación premium de servicios/productos y automatización de consultas comerciales.",
+    "title": "Hotel Gran Lucerna",
+    "description": "Página web desarrollada para el sector hotelero. Enfocada en la presentación visual e intuitiva de las instalaciones, habitaciones y servicios exclusivos del hotel, optimizando la experiencia del usuario para incentivar el contacto y las reservas directas.",
     "tags": [
-      "Catálogo Digital",
-      "Conversión de Clientes",
-      "Diseño Exclusivo",
-      "Gestión de Consultas",
-      "Experiencia de Usuario (UX)"
+      "Sitio Web Hotelero",
+      "Presentación de Servicios",
+      "Galería de Instalaciones",
+      "Atracción de Huéspedes",
+      "Interfaz Minimalista"
     ],
-    "imageUrl": "src/assets/lucerna.png",
+    "imageUrl": "lucerna/main.png",
     "imageAlt": "A premium, minimalist corporate website and digital catalog showcase interface.",
     "images": [
-      "src/assets/lucerna.png",
-      "src/assets/lucerna-catalog.png",
-      "src/assets/lucerna-contact.png"
+      "lucerna/main.png",
+      "lucerna/services.png",
+      "lucerna/instalations.png",
+      "lucerna/contact.png"
     ],
     "demoUrl": "https://lucerna-demo.vercel.app/",
     "repoUrl": ""
