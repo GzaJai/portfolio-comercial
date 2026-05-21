@@ -4,6 +4,14 @@ import data from "../data/projects.json";
 import ProjectModal from "./ProjectModal";
 
 function ProjectCard({ project, onClick }) {
+
+  const IMAGE_BASE_URL = "https://raw.githubusercontent.com/GzaJai/portfolio-comercial/refs/heads/master/src/assets/projects/";
+
+  // Si project.imageUrl ya es una URL absoluta, úsala tal cual; si es relativa, concatena la base
+  const imageSrc = project.imageUrl?.startsWith("http")
+    ? project.imageUrl
+    : IMAGE_BASE_URL + project.imageUrl;
+
   return (
     <div className="card-glow-wrapper group cursor-pointer" onClick={onClick}>
       <article className="rounded-xl overflow-hidden shadow-[0_8px_16px_-4px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col relative z-10 bg-surface">
@@ -12,7 +20,7 @@ function ProjectCard({ project, onClick }) {
           <img
             alt={project.imageAlt}
             className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-            src={project.imageUrl}
+            src={imageSrc}
           />
         </div>
 
