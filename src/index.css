@@ -308,6 +308,40 @@
   }
 }
 
+/* ─── Mobile Animations ─── */
+.animate-fadein-slide {
+  animation: fadein-slide 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes fadein-slide {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.mobile-glow {
+  box-shadow: 0 0 0 0 #a5b4fc, 0 0 32px 8px #6366f1;
+}
+
+.mobile-glow-anim {
+  animation: mobile-glow-pulse 2.2s infinite alternate;
+  box-shadow: 0 0 0 0 #a5b4fc, 0 0 32px 8px #6366f1;
+}
+
+@keyframes mobile-glow-pulse {
+  from {
+    box-shadow: 0 0 0 0 #a5b4fc, 0 0 32px 8px #6366f1;
+  }
+  to {
+    box-shadow: 0 0 0 12px #a5b4fc44, 0 0 48px 16px #6366f1;
+  }
+}
+
 /* ─── Hidden Scrollbar (mantiene scroll pero oculta la barra) ─── */
 .scrollbar-hidden {
   scrollbar-width: none;

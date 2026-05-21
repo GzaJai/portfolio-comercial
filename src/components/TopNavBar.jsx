@@ -10,7 +10,7 @@ export default function TopNavBar() {
   const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(whatsapp.message)}`;
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-smooth-fade relative">
+    <nav className="sticky top-0 z-50 w-full bg-white/90  md:bg-smooth-fade relative">
       {/* Gradient bottom border */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-surface-variant to-transparent pointer-events-none" />
 

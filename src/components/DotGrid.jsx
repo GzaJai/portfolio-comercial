@@ -1,6 +1,13 @@
 import { useEffect, useRef } from "react";
 
+function isMobile() {
+  if (typeof window === 'undefined') return false;
+  return window.innerWidth < 768;
+}
+
 export default function DotGrid() {
+  if (isMobile()) return null;
+
   const canvasRef = useRef(null);
 
   useEffect(() => {

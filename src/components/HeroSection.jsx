@@ -1,4 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+// Utilidad para detectar mobile
+function isMobile() {
+  if (typeof window === 'undefined') return false;
+  return window.innerWidth < 768;
+}
 import { MdDownload } from "react-icons/md";
 import UiLink from "./shared/ui/UiLink";
 import links from "../data/links.json";
@@ -65,56 +70,48 @@ const LAYER_OPACITIES = [
 export default function HeroSection() {
   const containerRef = useRef(null);
   const layersRef = useRef([]);
+  const [entered, setEntered] = useState(false);
   const { hero, whatsapp } = links;
   const phone = import.meta.env.VITE_WHATSAPP_PHONE;
   const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(whatsapp.message)}`;
 
   useEffect(() => {
-    const parallaxContainer = containerRef.current;
-    const parallaxLayers = layersRef.current;
-
-    if (
-      !parallaxContainer ||
-      parallaxLayers.length === 0 ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return;
+    if (isMobile()) {
+      const timerId = setTimeout(() => setEntered(true), 100);
+      return () => clearTimeout(timerId);
+    } else {
+      // Parallax desktop
+      const parallaxContainer = containerRef.current;
+      const parallaxLayers = layersRef.current;
+      if (!parallaxContainer || parallaxLayers.length === 0 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      let mouseX = 0;
+      let mouseY = 0;
+      let targetX = 0;
+      let targetY = 0;
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      function onMouseMove(e) {
+        mouseX = e.clientX - centerX;
+        mouseY = e.clientY - centerY;
+      }
+      function animate() {
+        targetX += (mouseX - targetX) * 0.1;
+        targetY += (mouseY - targetY) * 0.1;
+        parallaxLayers.forEach((layer) => {
+          if (!layer) return;
+          const speed = parseFloat(layer.dataset.speed) || 0.1;
+          const x = targetX * speed;
+          const y = targetY * speed;
+          layer.style.transform = `translate(${x}px, ${y}px)`;
+        });
+        requestAnimationFrame(animate);
+      }
+      document.addEventListener("mousemove", onMouseMove);
+      animate();
+      return () => {
+        document.removeEventListener("mousemove", onMouseMove);
+      };
     }
-
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetX = 0;
-    let targetY = 0;
-
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-
-    function onMouseMove(e) {
-      mouseX = e.clientX - centerX;
-      mouseY = e.clientY - centerY;
-    }
-
-    function animate() {
-      targetX += (mouseX - targetX) * 0.1;
-      targetY += (mouseY - targetY) * 0.1;
-
-      parallaxLayers.forEach((layer) => {
-        if (!layer) return;
-        const speed = parseFloat(layer.dataset.speed) || 0.1;
-        const x = targetX * speed;
-        const y = targetY * speed;
-        layer.style.transform = `translate(${x}px, ${y}px)`;
-      });
-
-      requestAnimationFrame(animate);
-    }
-
-    document.addEventListener("mousemove", onMouseMove);
-    animate();
-
-    return () => {
-      document.removeEventListener("mousemove", onMouseMove);
-    };
   }, []);
 
   return (
@@ -123,26 +120,30 @@ export default function HeroSection() {
       id="about"
     >
       {/* Parallax Background Layers */}
-      <div
-        ref={containerRef}
-        className="absolute inset-0 overflow-hidden pointer-events-none z-0 hidden md:block"
-      >
-        {PARALLAX_LAYERS.map((layer, i) => (
-          <div
-            key={i}
-            ref={(el) => (layersRef.current[i] = el)}
-            className={`parallax-layer ${LAYER_OPACITIES[i]}`}
-            data-speed={layer.speed}
-          >
-            {layer.children}
+      {/* Fondo de puntos animado mobile + parallax desktop */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        {/* Desktop: parallax (solo en desktop) */}
+        {!isMobile() && (
+          <div ref={containerRef} className="w-full h-full">
+            {PARALLAX_LAYERS.map((layer, i) => (
+              <div
+                key={i}
+                ref={(el) => (layersRef.current[i] = el)}
+                className={`parallax-layer ${LAYER_OPACITIES[i]}`}
+                data-speed={layer.speed}
+              >
+                {layer.children}
+              </div>
+            ))}
           </div>
-        ))}
+        )}
+
       </div>
 
       {/* Content Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center relative z-10">
+      <div className={`grid grid-cols-1 md:grid-cols-12 gap-12 items-center relative z-10 ${isMobile() ? (entered ? 'animate-fadein-slide' : 'opacity-0') : ''}`}>
         {/* Left: Text Content */}
-        <div className="md:col-span-7 flex flex-col items-start space-y-6 relative">
+        <div className={`md:col-span-7 flex flex-col items-start space-y-6 relative ${isMobile() ? (entered ? 'animate-fadein-slide' : 'opacity-0') : ''}`}> 
           {/* Soft mask to keep the dots extremely light behind the text */}
           <div className="absolute -inset-10 bg-hero-mask pointer-events-none z-0" />
 
@@ -189,14 +190,19 @@ export default function HeroSection() {
 
         {/* Right: Image */}
         <div className="md:col-span-5 w-full order-first md:order-last mb-8 md:mb-0">
-          <div className="aspect-square w-full max-w-[400px] mx-auto rounded-xl overflow-hidden bg-surface-container-high border border-surface-variant shadow-[0_4px_6px_-1px_rgb(0,0,0,0.05),0_2px_4px_-2px_rgb(0,0,0,0.05)] relative">
+          <div className={`aspect-square w-full max-w-[400px] mx-auto rounded-xl overflow-hidden bg-surface-container-high border border-surface-variant shadow-[0_4px_6px_-1px_rgb(0,0,0,0.05),0_2px_4px_-2px_rgb(0,0,0,0.05)] relative ${isMobile() ? 'animate-fadein-slide' : ''}`}>
             <img
               alt={hero.imageAlt}
-              className="w-full h-full object-cover"
+              className={`w-full h-full object-cover ${isMobile() ? 'mobile-glow' : ''}`}
               src={hero.imageUrl}
             />
+            {/* Glow animado mobile */}
+            {isMobile() && (
+              <span className="absolute inset-0 rounded-xl pointer-events-none mobile-glow-anim" />
+            )}
           </div>
         </div>
+
       </div>
     </section>
   );
