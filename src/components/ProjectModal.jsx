@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { MdClose, MdArrowForward, MdCode, MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { MdClose, MdArrowForward, MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { FaWhatsapp } from "react-icons/fa6";
 import UiLink from "../../shared/components/ui/UiLink";
 import UiTooltip from "../../shared/components/ui/UiTooltip";
 
@@ -9,6 +10,7 @@ export default function ProjectModal({ project, onClose }) {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const images = project?.images?.length ? project.images : [project?.imageUrl];
   const hasMultipleImages = images.length > 1;
+  const phone = import.meta.env.VITE_WHATSAPP_PHONE;
 
   // Reset active image index and lightbox status when project changes
   useEffect(() => {
@@ -67,7 +69,7 @@ export default function ProjectModal({ project, onClose }) {
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 md:top-6 md:right-6 text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-variant cursor-pointer z-10"
+          className="absolute top-4 right-4 md:top-6 md:right-6 text-on-surface-variant transition-colors p-2 rounded-full hover:bg-red-500 hover:text-white cursor-pointer z-10"
           aria-label="Cerrar modal"
         >
           <MdClose size={20} />
@@ -170,7 +172,7 @@ export default function ProjectModal({ project, onClose }) {
               {project.demoUrl ? (
                 <UiLink
                   href={project.demoUrl}
-                  className="flex-1 inline-flex items-center justify-center gap-2 bg-primary text-on-primary font-semibold px-4 py-2.5 text-sm rounded-lg hover:bg-primary-container hover:shadow-lg transition-all duration-300 cursor-pointer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 bg-primary text-on-primary font-semibold px-4 py-2.5 text-sm rounded-lg hover:bg-primary-container/85 hover:shadow-lg transition-all duration-300 cursor-pointer"
                 >
                   Visitar Sitio
                   <MdArrowForward size={16} className="translate-y-[0.5px]" />
@@ -190,28 +192,13 @@ export default function ProjectModal({ project, onClose }) {
                 </UiTooltip>
               )}
 
-              {project.repoUrl ? (
-                <UiLink
-                  href={project.repoUrl}
-                  className="flex-1 inline-flex items-center justify-center gap-2 bg-transparent border border-outline text-primary font-semibold px-4 py-2.5 text-sm rounded-lg hover:bg-surface-variant transition-all duration-300 cursor-pointer"
-                >
-                  <MdCode size={16} />
-                  Ver Repositorio
-                </UiLink>
-              ) : (
-                <UiTooltip
-                  text="Este repositorio es privado."
-                  className="flex-1"
-                >
-                  <button
-                    disabled
-                    className="w-full inline-flex items-center justify-center gap-2 bg-transparent border border-outline/30 text-outline font-semibold px-4 py-2.5 text-sm rounded-lg opacity-60 cursor-not-allowed"
-                  >
-                    <MdCode size={16} />
-                    Repo Privado
-                  </button>
-                </UiTooltip>
-              )}
+              <UiLink
+                href={`https://wa.me/${phone}?text=${encodeURIComponent(`Hola Gonzalo, queria consultar por ${project.title}`)}`}
+                className="flex-1 inline-flex items-center justify-center gap-2 bg-emerald-500/30 border border-secondary text-secondary font-semibold px-4 py-2.5 text-sm rounded-lg hover:bg-emerald-500 hover:text-white transition-all duration-300"
+              >
+                <FaWhatsapp size={24} />
+                Consultar
+              </UiLink>
             </div>
           </div>
         </div>
@@ -228,7 +215,7 @@ export default function ProjectModal({ project, onClose }) {
           {/* Close button */}
           <button
             onClick={() => setIsLightboxOpen(false)}
-            className="absolute top-6 right-6 text-white/70 hover:text-white hover:bg-white/10 p-2 rounded-full cursor-pointer transition-colors z-20"
+            className="absolute top-6 right-6 text-white/70 hover:text-white hover:bg-red-600 p-2 rounded-full cursor-pointer transition-colors z-20"
             aria-label="Cerrar vista ampliada"
           >
             <MdClose size={24} />
