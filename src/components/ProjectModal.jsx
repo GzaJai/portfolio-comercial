@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { MdClose, MdArrowForward, MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa6";
-import UiLink from "../../shared/components/ui/UiLink";
-import UiTooltip from "../../shared/components/ui/UiTooltip";
+import UiLink from "./shared/ui/UiLink";
+import UiTooltip from "./shared/ui/UiTooltip";
 
 export default function ProjectModal({ project, onClose }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);

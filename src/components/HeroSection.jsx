@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { MdDownload } from "react-icons/md";
-import UiLink from "../../shared/components/ui/UiLink";
+import UiLink from "./shared/ui/UiLink";
 import links from "../data/links.json";
 
 const PARALLAX_LAYERS = [

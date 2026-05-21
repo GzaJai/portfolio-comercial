@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MdMenu, MdClose } from "react-icons/md";
-import UiLink from "../../shared/components/ui/UiLink";
+import UiLink from "./shared/ui/UiLink";
 import links from "../data/links.json";
 
 export default function TopNavBar() {

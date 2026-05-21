@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import UiLink from "../../shared/components/ui/UiLink";
+import UiLink from "./shared/ui/UiLink";
 import links from "../data/links.json";
 
 export default function ContactSection() {
